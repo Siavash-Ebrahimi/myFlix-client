@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+
+import LoginView from '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 
@@ -6,37 +9,69 @@ export default class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        { _id: 1, Title: 'Inception', Description: 'Cobb steals information from his targets by entering their dreams. Saito offers to wipe clean Cobbs criminal history as payment for performing an inception on his sick competitor s son.', ImagePath: 'https://www.imdb.com/title/tt0266697/?ref_=vp_vi_tt_p' },
-        { _id: 2, Title: 'The Shawshank Redemption', Description: 'Andy Dufresne, a successful banker, is arrested for the murders of his wife and her lover, and is sentenced to life imprisonment at the Shawshank prison. He becomes the most unconventional prisoner.', ImagePath: '...' },
-        { _id: 3, Title: 'Gladiator', Description: 'Commodus takes over power and demotes Maximus, one of the preferred generals of his father, Emperor Marcus Aurelius. As a result, Maximus is relegated to fighting till death as a gladiator.', ImagePath: 'https://throughthesilverscreenuk.files.wordpress.com/2016/08/gladiator-movie-poster.jpg' }
-      ],
-      selectedMovie: null
+      movies: [],
+      selectedMovie: null,
+      user: null
     }
   }
 
-  //create a custom component method - setSelectedMovie
+  /* We have created a custom component method (A Call-Back Function) "setSelectedMovie" with an
+     argument of "newSelectedMovie", then we add a React "this.setState ({})" function 
+     to change the "state" of the "selectedMovie" key at this.state part in constructor() */
   setSelectedMovie(newSelectedMovie) {
     this.setState({
       selectedMovie: newSelectedMovie
     });
   }
 
-  render() {
-    const { movies, selectedMovie } = this.state;
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user */
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
 
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+  render() {
+    const { movies, selectedMovie, user } = this.state;
+
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+    /* We use the if with empty message (As actived if below) becuse 
+       it will remain empty while the fetching process takes place 
+       in the background. Until the data is finally fetched, 
+       you don't want to display the message "The list is empty" 
+       since you don't yet know whether the fetched array will be 
+       empty or not*/
+    // if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+    if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <div className="main-view">
         {selectedMovie
-          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+          ? <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }} />
           : movies.map(movie => (
             <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
           ))
         }
       </div>
     );
+  }
+
+  /* Using the React "componentDidMount" function & "Axios" Library ("axios")
+     to fetch all Movies data through our cloud base server provider "Heroku" 
+     that already stored our backend files on that, and our databased, MongoDB Atlas
+     has already connected to "Heroku". Next we are using the React "this.setState({})" 
+     function to add data to empty movie: [] array at constructor part. */
+  componentDidMount() {
+    axios.get('https://myflix-2022.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
 }
