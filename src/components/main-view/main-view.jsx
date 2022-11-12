@@ -4,6 +4,7 @@ import axios from 'axios';
 import LoginView from '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
+import RegistrationView from '../registration-view/registration-view';
 
 export default class MainView extends React.Component {
   constructor() {
@@ -31,6 +32,12 @@ export default class MainView extends React.Component {
     });
   }
 
+  signOut() {
+    this.setState({
+      user: null
+    })
+  }
+
   render() {
     const { movies, selectedMovie, user } = this.state;
 
@@ -55,7 +62,7 @@ export default class MainView extends React.Component {
             ))
           }
         </div>
-        <button>Sign Out</button>
+        <button type="button" onClick={this.signOut.bind(this)}>Sign Out</button>
       </>
     );
   }
@@ -78,5 +85,3 @@ export default class MainView extends React.Component {
   }
 
 }
-
-// export default MainView;

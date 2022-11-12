@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Register from '../registration-view/registration-view'
+import PropTypes from 'prop-types';
+// import Register from '../registration-view/registration-view'
 
 export default function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -24,7 +25,11 @@ export default function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Submit</button>
-      <button type="button">Registration</button>
+      <button type="button">Register</button>
     </form>
   );
 }
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+};
