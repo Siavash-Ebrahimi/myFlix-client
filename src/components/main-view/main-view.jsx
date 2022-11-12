@@ -34,7 +34,8 @@ export default class MainView extends React.Component {
 
   signOut() {
     this.setState({
-      user: null
+      user: null,
+      selectedMovie: null
     })
   }
 

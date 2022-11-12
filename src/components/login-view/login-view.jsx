@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import Register from '../registration-view/registration-view'
+import Register from '../registration-view/registration-view'
 
 export default function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -14,6 +14,10 @@ export default function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  const registerButton = () => {
+    <Register />;
+  }
+
   return (
     <form>
       <label>
@@ -25,7 +29,7 @@ export default function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Submit</button>
-      <button type="button">Register</button>
+      <button type="button" onClick={registerButton}>Register</button>
     </form>
   );
 }
