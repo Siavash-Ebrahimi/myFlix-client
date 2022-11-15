@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button, Card, CardGroup, Container, Row, Col } from 'react-bootstrap';
 
 export default class MovieView extends React.Component {
 
@@ -11,29 +12,30 @@ export default class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">escrDiption: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
-      </div>
+      <Container>
+        <Row>
+          <Col md={2}></Col>
+          <Col>
+            <CardGroup>
+              <Card style={{ marginTop: 100, marginBotoom: 50, maxWidth: 500 }}>
+                <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" />
+                <Card.Body>
+                  <Card.Title>{movie.Title}</Card.Title>
+                  <Card.Text>  </Card.Text>
+                  <Card.Subtitle>Description:</Card.Subtitle>
+                  <Card.Text style={{ flex: 1 }}>{movie.Description}</Card.Text>
+                  <Card.Subtitle>Movie Genre:</Card.Subtitle>
+                  <Card.Text style={{ flex: 1 }}>{movie.Genre.Name}</Card.Text>
+                  <Card.Subtitle>Director:</Card.Subtitle>
+                  <Card.Text style={{ flex: 1 }}>{movie.Director.Name}</Card.Text>
+                  <Button type="button" variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Col>
+          <Col md={2}></Col>
+        </Row>
+      </Container >
     );
   }
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { Container, Row, Col, Navbar, NavDropdown, Nav } from 'react-bootstrap';
 
 import LoginView from '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
-import RegistrationView from '../registration-view/registration-view';
+import RegisterView from '../registration-view/registration-view';
 
 export default class MainView extends React.Component {
   constructor() {
@@ -34,15 +35,28 @@ export default class MainView extends React.Component {
 
   signOut() {
     this.setState({
-      user: null,
-      selectedMovie: null
+      user: null
     })
   }
 
   render() {
     const { movies, selectedMovie, user } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) {
+      return (
+        <>
+          <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
+            <Container>
+              <Navbar.Brand href="#">myFlix App</Navbar.Brand>
+              <Nav className="me-auto">
+                <Nav.Link href="#">Register</Nav.Link>
+              </Nav>
+            </Container>
+          </Navbar>
+          <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+        </>
+      )
+    }
 
     /* We use the if with empty message (As actived if below) becuse 
        it will remain empty while the fetching process takes place 
@@ -55,15 +69,38 @@ export default class MainView extends React.Component {
 
     return (
       <>
-        <div className="main-view">
-          {selectedMovie
-            ? <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }} />
-            : movies.map(movie => (
-              <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
-            ))
-          }
-        </div>
-        <button type="button" onClick={this.signOut.bind(this)}>Sign Out</button>
+        <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
+          <Container>
+            <Navbar.Brand href="#">myFlix App</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="#">Movies</Nav.Link>
+              <NavDropdown title={user} id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.2" onClick={this.signOut.bind(this)}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Container>
+        </Navbar>
+        <Container style={{ marginTop: 100 }}>
+          <Row className="main-view justify-content-md-center">
+            {selectedMovie
+              ? (
+                <Col md={8}>
+                  <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }} />
+                </Col>
+              )
+              :
+              movies.map(movie => (
+                <Col md={3}>
+                  <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+                </Col>
+              ))
+            }
+          </Row>
+        </Container>
       </>
     );
   }

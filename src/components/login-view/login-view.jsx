@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Register from '../registration-view/registration-view'
+import { Form, Button, Container, Row, Col, CardGroup, Card } from 'react-bootstrap';
 
 export default function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -14,23 +14,35 @@ export default function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  const registerButton = () => {
-    <Register />;
-  }
-
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
-      <button type="button" onClick={registerButton}>Register</button>
-    </form>
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col>
+          <CardGroup>
+            <Card style={{ marginTop: 150, marginBotoom: 50, width: 100 }}>
+              <Card.Body>
+                <Card.Title>Pelase Login</Card.Title>
+                <Form>
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control type="text" placeholder='Please Enter Your Username' onChange={e => setUsername(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group controlId="formPassword">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control type="password" placeholder='Please Enter Your Password' onChange={e => setPassword(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="primary" type="submit" onClick={handleSubmit}>
+                    Submit
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
   );
 }
 
