@@ -1,11 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, CardGroup, Container, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class MovieView extends React.Component {
 
-  keypressCallback(event) {
-    console.log(event.key);
+  addMovieToFavorites(e) {
+    const { movie } = this.props;
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    e.preventDefault();
+    axios.post(`https://myflix-2022.herokuapp.com/users/${username}/movies/${movie._id}`,
+      { username: localStorage.getItem("user") },
+      { headers: { Authorization: `Bearer ${token}` }, }
+    )
+      .then((response) => {
+        console.log(response);
+        alert("Movie added");
+      })
+      .catch((error) => console.error(error));
   }
 
   render() {
@@ -28,7 +43,19 @@ export default class MovieView extends React.Component {
                   <Card.Text style={{ flex: 1 }}>{movie.Genre.Name}</Card.Text>
                   <Card.Subtitle>Director:</Card.Subtitle>
                   <Card.Text style={{ flex: 1 }}>{movie.Director.Name}</Card.Text>
-                  <Button type="button" variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
+
+                  <Link to={`/directors/${movie.Director.Name}`}>
+                    <p><a>Director</a></p>
+                  </Link>
+
+                  <Link to={`/genre/${movie.Genre.Name}`}>
+                    <Button variant="link">Genre</Button>
+                  </Link>
+
+                  <Button type="button" variant="primary" onClick={() => { onBackClick() }}>Back</Button>
+
+                  <Button type="button" variant="primary" style={{ marginLeft: 10 }} onClick={(e) => this.addMovieToFavorites(e)}>Add to favorites</Button>
+
                 </Card.Body>
               </Card>
             </CardGroup>
@@ -37,14 +64,6 @@ export default class MovieView extends React.Component {
         </Row>
       </Container >
     );
-  }
-
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
   }
 }
 

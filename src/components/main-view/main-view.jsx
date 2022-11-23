@@ -1,18 +1,22 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Navbar, NavDropdown, Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
+import Menubar from '../navbar/navbar';
 import LoginView from '../login-view/login-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
-import RegisterView from '../registration-view/registration-view';
+import DirectorView from '../director-view/director-view';
+import GenreView from '../genre-view/genre-view';
+import RegistrationView from '../registration-view/registration-view.jsx';
+import ProfileView from '../profile-view/profile-view.jsx';
 
 export default class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null
     }
   }
@@ -27,99 +31,127 @@ export default class MainView extends React.Component {
   }
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user */
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  getMovies(token) {
+    axios.get('https://myflix-2022.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   signOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.setState({
       user: null
     })
   }
 
   render() {
-    const { movies, selectedMovie, user } = this.state;
-
-    if (!user) {
-      return (
-        <>
-          <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
-            <Container>
-              <Navbar.Brand href="#">myFlix App</Navbar.Brand>
-              <Nav className="me-auto">
-                <Nav.Link href="#">Register</Nav.Link>
-              </Nav>
-            </Container>
-          </Navbar>
-          <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-        </>
-      )
-    }
-
-    /* We use the if with empty message (As actived if below) becuse 
-       it will remain empty while the fetching process takes place 
-       in the background. Until the data is finally fetched, 
-       you don't want to display the message "The list is empty" 
-       since you don't yet know whether the fetched array will be 
-       empty or not*/
-    // if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
-    if (movies.length === 0) return <div className="main-view" />;
-
+    const { movies, user } = this.state;
     return (
-      <>
-        <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
-          <Container>
-            <Navbar.Brand href="#">myFlix App</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="#">Movies</Nav.Link>
-              <NavDropdown title={user} id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2" onClick={this.signOut.bind(this)}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Container>
-        </Navbar>
-        <Container style={{ marginTop: 100 }}>
+      <Router>
+        <Menubar user={user} />
+        <Container>
           <Row className="main-view justify-content-md-center">
-            {selectedMovie
-              ? (
-                <Col md={8}>
-                  <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }} />
-                </Col>
-              )
-              :
-              movies.map(movie => (
-                <Col md={3}>
-                  <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+
+            <Route exact path="/" render={() => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />;
+              return movies.map(m => (
+                <Col md={3} key={m._id} style={{ marginTop: 50 }}>
+                  <MovieCard movie={m} />
                 </Col>
               ))
+            }} />
+
+
+            <Route path="/users/register" render={() => {
+              return (
+                < Col lg={8}>
+                  <RegistrationView />
+                </Col>
+              );
+            }} />
+
+
+            <Route path="/movies/:movieId" render={({ match, history }) => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />;
+              return <Col md={8}>
+                <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+              </Col>
+            }} />
+
+            <Route path="/directors/:name" render={({ match, history }) => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />;
+              return <Col md={8}>
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+              </Col>
             }
+            } />
+
+            <Route path="/genre/:name" render={({ match, history }) => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />;
+              return <Col md={8}>
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+              </Col>
+            }
+            } />
+
+
+            <Route path="/user/:user" render={({ match, history }) => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />;
+              return <Col md={8}>
+                <ProfileView movies={movies} user={user} onBackClick={() => history.goBack()} />
+              </Col>
+            }
+            } />
+
           </Row>
         </Container>
-      </>
+      </Router >
     );
   }
 
-  /* Using the React "componentDidMount" function & "Axios" Library ("axios")
-     to fetch all Movies data through our cloud base server provider "Heroku" 
-     that already stored our backend files on that, and our databased, MongoDB Atlas
-     has already connected to "Heroku". Next we are using the React "this.setState({})" 
-     function to add data to empty movie: [] array at constructor part. */
   componentDidMount() {
-    axios.get('https://myflix-2022.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getMovies(accessToken);
+    }
   }
 
 }
