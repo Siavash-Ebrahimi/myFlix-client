@@ -28,12 +28,12 @@ export default function Menubar({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && (<Nav.Link href={`./users/${user}`}>{user}</Nav.Link>)}
-            {isAuth() && (<Nav.Link href={`/user/${user}`}>Profile</Nav.Link>)}
+            {/* {isAuth() && (<Nav.Link href={`./users/${user}`}>{user}</Nav.Link>)} */}
+            {isAuth() && (<Nav.Link href={`/user/${user}`}>{user}</Nav.Link>)}
             {/* {isAuth() && (<Link to={`/users/${user}`}>
               testprof
             </Link>)} */}
-            {isAuth() && (<Nav.Link href="/movie">Home</Nav.Link>)}
+            {isAuth() && (<Nav.Link href="/">Home</Nav.Link>)}
             {isAuth() && (<Nav.Link variant="link" onClick={() => { onLoggedOut() }}>Logout</Nav.Link>)}
             {/* {!isAuth() && (<Nav.Link href="/users/register">Register</Nav.Link>)} */}
             {!isAuth() && (<Link to={`/users/register`}>

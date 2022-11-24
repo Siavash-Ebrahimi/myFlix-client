@@ -9,18 +9,15 @@ import { Link } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert';
 
 
-export default function ProfileView({ user, movies }) {
+export default function ProfileView({ user, movies, onLoggedIn }) {
   const [userAllData, setUserAllData] = useState([]);
   const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
-  // const [movieFavID, setmovieFavID] = useState('');
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-
-  // Input Validation Variabales Error Hook Section:
   const [usernameerr, setUsernameErr] = useState('');
   const [passworderr, setPasswordErr] = useState('');
   const [emailerr, setEmailErr] = useState('');
@@ -42,7 +39,7 @@ export default function ProfileView({ user, movies }) {
 
   useEffect(() => {
     getUser();
-  })
+  }, [])
 
   // Delete User Account. 
   const removeUser = () => {
@@ -50,24 +47,23 @@ export default function ProfileView({ user, movies }) {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        const remove = response.data;
-        // console.log(remove);
+        onLoggedIn(null)
         alert('Your account removed successful.');
-        // localStorage.removeItem('token');
-        // localStorage.removeItem('user');
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  const removeFav = () => {
-    console.log("Hello");
-    axios.delete(`https://myflix-2022.herokuapp.com/users/${user}/movies/63440f57c6266a7d9045b5c7`, {
+  // Remove a Favorite Movie From List
+  const removeFav = (id, index) => {
+    axios.delete(`https://myflix-2022.herokuapp.com/users/${user}/movies/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
-        setUserAllData(response.data);
+        let favMovies = [...favoriteMoviesList];
+        favMovies.splice(index, 1);
+        setFavoriteMoviesList(favMovies);
       })
       .catch(function (error) {
         console.log(error);
@@ -148,10 +144,8 @@ export default function ProfileView({ user, movies }) {
 
 
   return (
-    // <p>Hi There Siavash</p>
     <>
       <UserInfo name={userAllData.Username} email={userAllData.Email} />
-
       <form className='profile-form'>
         <h2>Want to change some info?</h2>
         <label>Username:</label>
@@ -178,31 +172,30 @@ export default function ProfileView({ user, movies }) {
 
       <div>
         <h2>Favorite Movies:</h2>
-        {favoriteMoviesList.map((movie) => {
-          return (
-            <>
-              <div>
-                <img variant="top" src={movie.ImagePath}></img>
-              </div>
-              <div>
-                <p>{movie.Title}</p>
-              </div>
-              <div>
-                <Link to={`/movies/${movie._id}`}>
-                  <button variant="primary">Get More</button>
-                </Link>
-                <button variant="primary" onClick={removeFav}>Remove Movie From Favorite List</button>
-              </div>
-              <div>
-                <p>====================================</p>
-              </div>
-            </>
-          )
-        })}
+        {favoriteMoviesList.map((movie, index) => (
+          <div key={movie._id}>
+            <div>
+              <img variant="top" src={movie.ImagePath}></img>
+            </div>
+            <div>
+              <p>{movie.Title}</p>
+            </div>
+            <div>
+              <Link to={`/movies/${movie._id}`}>
+                <button variant="primary">Get More</button>
+              </Link>
+              <button variant="primary" onClick={() => removeFav(movie._id, index)}>Remove Movie From Favorite List</button>
+            </div>
+            <div>
+              <p>====================================</p>
+            </div>
+          </div>
+        )
+        )}
       </div>
-      <dive>
+      <div>
         <button type="submit" onClick={removeUser}>Delete My Account</button>
-      </dive>
+      </div>
     </>
   );
 }

@@ -32,9 +32,8 @@ export default class MainView extends React.Component {
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user */
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData?.user?.Username || null
     });
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -133,7 +132,7 @@ export default class MainView extends React.Component {
               </Col>
               if (movies.length === 0) return <div className="main-view" />;
               return <Col md={8}>
-                <ProfileView movies={movies} user={user} onBackClick={() => history.goBack()} />
+                <ProfileView movies={movies} user={user} onLoggedIn={user => this.onLoggedIn(user)} onBackClick={() => history.goBack()} />
               </Col>
             }
             } />
