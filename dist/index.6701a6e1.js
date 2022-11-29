@@ -45877,6 +45877,7 @@ function RegistrationView() {
         }).then((response)=>{
             const data = response.data;
             console.log(data);
+            // onLoggedIn(null)
             alert('Registration successful, please login.');
         // window('/', '_self'); // '_self open the page in curent tab'
         }).catch((error)=>{
@@ -45893,45 +45894,45 @@ function RegistrationView() {
     /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
-            lineNumber: 82
+            lineNumber: 83
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 83
+                    lineNumber: 84
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 84
+                        lineNumber: 85
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 85
+                            lineNumber: 86
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 86
+                                lineNumber: 87
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                    lineNumber: 87
+                                    lineNumber: 88
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                         __source: {
                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                            lineNumber: 88
+                                            lineNumber: 89
                                         },
                                         __self: this,
                                         children: "Please Register"
@@ -45939,7 +45940,7 @@ function RegistrationView() {
                                     /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                                         __source: {
                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                            lineNumber: 89
+                                            lineNumber: 90
                                         },
                                         __self: this,
                                         children: [
@@ -45947,14 +45948,14 @@ function RegistrationView() {
                                                 controlId: "formUsername",
                                                 __source: {
                                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                                    lineNumber: 90
+                                                    lineNumber: 91
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 91
+                                                            lineNumber: 92
                                                         },
                                                         __self: this,
                                                         children: "Usernam:"
@@ -45968,14 +45969,14 @@ function RegistrationView() {
                                                         ,
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 92
+                                                            lineNumber: 93
                                                         },
                                                         __self: this
                                                     }),
                                                     usernameerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 93
+                                                            lineNumber: 94
                                                         },
                                                         __self: this,
                                                         children: usernameerr
@@ -45986,14 +45987,14 @@ function RegistrationView() {
                                                 controlId: "formEmail",
                                                 __source: {
                                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                                    lineNumber: 95
+                                                    lineNumber: 96
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 96
+                                                            lineNumber: 97
                                                         },
                                                         __self: this,
                                                         children: "Email:"
@@ -46006,14 +46007,14 @@ function RegistrationView() {
                                                         ,
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 97
+                                                            lineNumber: 98
                                                         },
                                                         __self: this
                                                     }),
                                                     emailerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 98
+                                                            lineNumber: 99
                                                         },
                                                         __self: this,
                                                         children: emailerr
@@ -46024,14 +46025,14 @@ function RegistrationView() {
                                                 controlId: "formPassword",
                                                 __source: {
                                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                                    lineNumber: 100
+                                                    lineNumber: 101
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 101
+                                                            lineNumber: 102
                                                         },
                                                         __self: this,
                                                         children: "Password:"
@@ -46045,14 +46046,14 @@ function RegistrationView() {
                                                         ,
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 102
+                                                            lineNumber: 103
                                                         },
                                                         __self: this
                                                     }),
                                                     passworderr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 103
+                                                            lineNumber: 104
                                                         },
                                                         __self: this,
                                                         children: passworderr
@@ -46063,14 +46064,14 @@ function RegistrationView() {
                                                 controlId: "formBirthday",
                                                 __source: {
                                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                                    lineNumber: 105
+                                                    lineNumber: 106
                                                 },
                                                 __self: this,
                                                 children: [
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 106
+                                                            lineNumber: 107
                                                         },
                                                         __self: this,
                                                         children: "Birthday:"
@@ -46083,14 +46084,14 @@ function RegistrationView() {
                                                         ,
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 107
+                                                            lineNumber: 108
                                                         },
                                                         __self: this
                                                     }),
                                                     birthdayerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                                         __source: {
                                                             fileName: "src/components/registration-view/registration-view.jsx",
-                                                            lineNumber: 108
+                                                            lineNumber: 109
                                                         },
                                                         __self: this,
                                                         children: birthdayerr
@@ -46103,7 +46104,7 @@ function RegistrationView() {
                                                 onClick: handleSubmit,
                                                 __source: {
                                                     fileName: "src/components/registration-view/registration-view.jsx",
-                                                    lineNumber: 110
+                                                    lineNumber: 111
                                                 },
                                                 __self: this,
                                                 children: "Register"
@@ -46120,14 +46121,14 @@ function RegistrationView() {
                 className: "justify-content-center m-1",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 119
+                    lineNumber: 120
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                     to: "/",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 121
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("a", {
@@ -46135,7 +46136,7 @@ function RegistrationView() {
                         type: "button",
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 121
+                            lineNumber: 122
                         },
                         __self: this,
                         children: "I have an account."
@@ -46211,6 +46212,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
             console.log(error);
         });
     };
+    // Run the getUser 
     _react.useEffect(()=>{
         getUser();
     }, []);
@@ -46262,9 +46264,6 @@ function ProfileView({ user , movies , onLoggedIn  }) {
         if (!email) {
             setEmailErr('Email Required');
             isReq = false;
-        } else if (email.indexOf('@') === -1) {
-            setEmailErr('Email should has @ character');
-            isReq = false;
         }
         if (!birthday) {
             setBirthdayErr('Birthday Required');
@@ -46276,9 +46275,13 @@ function ProfileView({ user , movies , onLoggedIn  }) {
         e.preventDefault();
         console.log(user);
         const isReq = validate();
-        if (isReq) _axiosDefault.default.put(`https://myflix-2022.herokuapp.com/users/${user}`, {
+        const Username = localStorage.getItem("user");
+        const newToken = localStorage.getItem("token");
+        console.log('UserName:' + Username, newToken);
+        // debugger;
+        if (isReq) _axiosDefault.default.put(`https://myflix-2022.herokuapp.com/users/${Username}`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${newToken}`
             }
         }, {
             Username: username,
@@ -46319,7 +46322,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                 email: userAllData.Email,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 148
+                    lineNumber: 149
                 },
                 __self: this
             }),
@@ -46327,14 +46330,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                 className: "profile-form",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 149
+                    lineNumber: 150
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h2", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 150
+                            lineNumber: 151
                         },
                         __self: this,
                         children: "Want to change some info?"
@@ -46342,7 +46345,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 151
+                            lineNumber: 152
                         },
                         __self: this,
                         children: "Username:"
@@ -46355,14 +46358,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                         ,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 152
+                            lineNumber: 153
                         },
                         __self: this
                     }),
                     usernameerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 153
+                            lineNumber: 154
                         },
                         __self: this,
                         children: usernameerr
@@ -46370,7 +46373,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 155
+                            lineNumber: 156
                         },
                         __self: this,
                         children: "Password:"
@@ -46383,14 +46386,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                         ,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 156
+                            lineNumber: 157
                         },
                         __self: this
                     }),
                     passworderr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 157
+                            lineNumber: 158
                         },
                         __self: this,
                         children: passworderr
@@ -46398,7 +46401,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 159
+                            lineNumber: 160
                         },
                         __self: this,
                         children: "Email address:"
@@ -46411,14 +46414,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                         ,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 160
+                            lineNumber: 161
                         },
                         __self: this
                     }),
                     emailerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 161
+                            lineNumber: 162
                         },
                         __self: this,
                         children: emailerr
@@ -46426,7 +46429,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 163
+                            lineNumber: 164
                         },
                         __self: this,
                         children: "Birthday:"
@@ -46439,14 +46442,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                         ,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 164
+                            lineNumber: 165
                         },
                         __self: this
                     }),
                     birthdayerr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 165
+                            lineNumber: 166
                         },
                         __self: this,
                         children: birthdayerr
@@ -46454,7 +46457,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 166
+                            lineNumber: 167
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("button", {
@@ -46462,7 +46465,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                             onClick: updateSubmit,
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 167
+                                lineNumber: 168
                             },
                             __self: this,
                             children: "Update"
@@ -46473,14 +46476,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 173
+                    lineNumber: 174
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h2", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 174
+                            lineNumber: 175
                         },
                         __self: this,
                         children: "Favorite Movies:"
@@ -46488,14 +46491,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     favoriteMoviesList.map((movie, index)=>/*#__PURE__*/ _jsxRuntime.jsxs("div", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 176
+                                lineNumber: 177
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 177
+                                        lineNumber: 178
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
@@ -46503,7 +46506,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                         src: movie.ImagePath,
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 178
+                                            lineNumber: 179
                                         },
                                         __self: this
                                     })
@@ -46511,13 +46514,13 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 180
+                                        lineNumber: 181
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 181
+                                            lineNumber: 182
                                         },
                                         __self: this,
                                         children: movie.Title
@@ -46526,7 +46529,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 183
+                                        lineNumber: 184
                                     },
                                     __self: this,
                                     children: [
@@ -46534,14 +46537,14 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                             to: `/movies/${movie._id}`,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 184
+                                                lineNumber: 185
                                             },
                                             __self: this,
                                             children: /*#__PURE__*/ _jsxRuntime.jsx("button", {
                                                 variant: "primary",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 185
+                                                    lineNumber: 186
                                                 },
                                                 __self: this,
                                                 children: "Get More"
@@ -46553,7 +46556,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                             ,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 187
+                                                lineNumber: 188
                                             },
                                             __self: this,
                                             children: "Remove Movie From Favorite List"
@@ -46563,13 +46566,13 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 189
+                                        lineNumber: 190
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 190
+                                            lineNumber: 191
                                         },
                                         __self: this,
                                         children: "===================================="
@@ -46583,7 +46586,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 196
+                    lineNumber: 197
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx("button", {
@@ -46591,7 +46594,7 @@ function ProfileView({ user , movies , onLoggedIn  }) {
                     onClick: removeUser,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 197
+                        lineNumber: 198
                     },
                     __self: this,
                     children: "Delete My Account"

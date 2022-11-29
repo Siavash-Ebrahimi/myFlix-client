@@ -61,6 +61,7 @@ export default function RegistrationView() {
         .then(response => {
           const data = response.data;
           console.log(data);
+          // onLoggedIn(null)
           alert('Registration successful, please login.');
           // window('/', '_self'); // '_self open the page in curent tab'
         })

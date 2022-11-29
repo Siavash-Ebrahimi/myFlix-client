@@ -36,7 +36,7 @@ export default function ProfileView({ user, movies, onLoggedIn }) {
         console.log(error);
       });
   }
-
+  // Run the getUser 
   useEffect(() => {
     getUser();
   }, [])
@@ -89,9 +89,6 @@ export default function ProfileView({ user, movies, onLoggedIn }) {
     if (!email) {
       setEmailErr('Email Required');
       isReq = false;
-    } else if (email.indexOf('@') === -1) {
-      setEmailErr('Email should has @ character');
-      isReq = false;
     }
     if (!birthday) {
       setBirthdayErr('Birthday Required');
@@ -104,10 +101,14 @@ export default function ProfileView({ user, movies, onLoggedIn }) {
     e.preventDefault();
     console.log(user);
     const isReq = validate();
+    const Username = localStorage.getItem("user");
+    const newToken = localStorage.getItem("token");
+    console.log('UserName:' + Username, newToken);
+    // debugger;
     if (isReq) {
-      axios.put(`https://myflix-2022.herokuapp.com/users/${user}`,
+      axios.put(`https://myflix-2022.herokuapp.com/users/${Username}`,
         {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${newToken}` }
         },
         {
           Username: username,
